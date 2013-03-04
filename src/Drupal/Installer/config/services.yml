@@ -1,0 +1,12 @@
+services:
+  drupal_installer:
+    class: Drupal\Installer\Drupal7Installer
+    arguments:
+      - %drupal_installer.config%
+  drupal_installer.context.initializer:
+    class: Drupal\Installer\Initializer
+    arguments:
+      - @drupal_installer
+    tags:
+      - { name: behat.context.initializer }
+      - { name: behat.event_subscriber, priority: 0 }

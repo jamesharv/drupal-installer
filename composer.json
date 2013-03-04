@@ -1,0 +1,16 @@
+{
+  "name": "jamesharv/drupal-installer",
+  "type": "behat-extension",
+  "description": "Drupal installer extension for Behat",
+  "keywords": ["drupal", "web", "test"],
+  "license": "GPL-2.0+",
+  "require": {
+    "drupal/drupal-extension": "*"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-0": {
+      "Drupal\\Installer": "src/"
+    }
+  }
+}
