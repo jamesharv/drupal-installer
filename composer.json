@@ -12,5 +12,6 @@
     "psr-0": {
       "Drupal\\Installer": "src/"
     }
-  }
+  },
+  "bin": ["bin/installer"]
 }

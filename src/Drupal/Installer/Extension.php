@@ -12,6 +12,7 @@ class Extension extends \Behat\Behat\Extension\Extension {
     $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/config'));
     $loader->load('services.yml');
     $container->setParameter('drupal_installer.config', $config);
+    $container->setParameter('drupal_installer.drupal_root', $config['drupal']['drupal_root']);
   }
 
   /**

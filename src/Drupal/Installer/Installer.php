@@ -2,7 +2,6 @@
 namespace Drupal\Installer;
 
 abstract class Installer {
-  protected $config;
 
   /**
    *  Constructs an Installer.
@@ -15,34 +14,23 @@ abstract class Installer {
   }
 
   /**
-   * Initializes the Drupal installation. Depending on config, this may or may
-   * not include either of the following:
-   *  - dropping the existing database
-   *  - installing a fresh application
+   * Installs Drupal.
+   *
+   * @param bool $drop
+   *  Whether or not to drop an existing installation before installing.
    */
-  abstract public function initialize();
+  abstract public function install();
 
   /**
-   * Finalizes the Drupal installation. Depending on config this can include
-   * uninstalling the database.
-   */
-  abstract public function finalize();
-
-  /**
-   * Return whether the Drupal installation been initialized.
+   * Returns whether Drupal is already installed.
    *
    * @return bool
-   *
-   * @see self::initialize()
    */
-  abstract public function isInitialized();
+  abstract public function isInstalled();
 
   /**
-   * Return whether the Drupal installation been finalized.
-   *
-   * @return bool
-   *
-   * @see self::finalize()
+   * Uninstalls Drupal.
    */
-  abstract public function isFinalized();
+  abstract public function uninstall();
+
 }

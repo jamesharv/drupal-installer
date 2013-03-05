@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/../../../autoload.php';
+
+use Symfony\Component\ClassLoader\UniversalClassLoader,
+    Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new Drupal\Installer\InstallCommand());
+$application->add(new Drupal\Installer\UninstallCommand());
+$application->run();

@@ -1,12 +1,13 @@
 services:
-  drupal_installer:
-    class: Drupal\Installer\Drupal7Installer
+  drupal_installer.shutdown_handler:
+    class: Drupal\Installer\ShutdownHandler
     arguments:
-      - %drupal_installer.config%
+      - %drupal_installer.drupal_root%
   drupal_installer.context.initializer:
     class: Drupal\Installer\Initializer
     arguments:
-      - @drupal_installer
+      - %drupal_installer.config%
+      - @drupal_installer.shutdown_handler
     tags:
       - { name: behat.context.initializer }
       - { name: behat.event_subscriber, priority: 0 }
