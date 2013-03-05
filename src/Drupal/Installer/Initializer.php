@@ -16,10 +16,29 @@ class Initializer implements InitializerInterface, EventSubscriberInterface
 
   protected static $initialized = FALSE;
   protected static $finalized = FALSE;
+  protected static $enabled = TRUE;
 
   public function __construct(array $config, ShutdownHandler $shutdown_handler) {
     $this->config = $config;
     $this->shutdown_handler = $shutdown_handler;
+    $this->checkEnabled();
+  }
+
+  /**
+   * TODO: Ugly hack for avoiding installation when certain options specified.
+   */
+  protected function checkEnabled() {
+    $disabled_options = array(
+      '-d',
+      '-dl',
+      '--definitions',
+      '--init',
+      '--format',
+      '-f',
+      '--story-syntax',
+    );
+    $args = $_SERVER['argv'];
+    self::$enabled = count(array_intersect($args, $disabled_options)) == 0;
   }
 
   /**
@@ -43,7 +62,7 @@ class Initializer implements InitializerInterface, EventSubscriberInterface
    * uninstalling it completely, if so configured in behat.yml.
    */
   public function finalizeDrupalInstallation() {
-    if (self::$finalized) {
+    if (self::$finalized || !self::$enabled) {
       return FALSE;
     }
 
@@ -66,7 +85,7 @@ class Initializer implements InitializerInterface, EventSubscriberInterface
    * @see self::getSubscribedEvents()
    */
   public function initialize(ContextInterface $context) {
-    if (self::$initialized) {
+    if (self::$initialized || !self::$enabled) {
       return FALSE;
     }
 
