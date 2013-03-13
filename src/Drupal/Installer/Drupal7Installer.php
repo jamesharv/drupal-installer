@@ -26,8 +26,6 @@ class Drupal7Installer extends Installer {
       return;
     }
 
-    touch($this->config['switch_file']);
-
     // Validate, and prepare environment for Drupal bootstrap.
     $core = new Drupal7($this->config['drupal_root']);
 
@@ -157,7 +155,5 @@ class Drupal7Installer extends Installer {
     foreach ($this->getInstalledTables() as $table) {
       db_query('DROP TABLE ' . $table);
     }
-
-    unlink($this->config['switch_file']);
   }
 }

@@ -41,6 +41,8 @@ class InstallCommand extends Command {
 
     $output->write("Installing Drupal...");
 
+    touch($options['switch_file']);
+
     $installer = new Drupal7Installer($options);
 
     if ($options['drop'] && $installer->isInstalled()) {

@@ -42,6 +42,9 @@ class UninstallCommand extends Command {
     }
 
     $installer->uninstall();
+
+    unlink($options['switch_file']);
+
     $output->write("Done\n");
   }
 }
